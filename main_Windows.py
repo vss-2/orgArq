@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+# Função do encoding é evitar o erro:
+# Non-ASCII character '\xc3' in file on line 4, but no encoding declared
+
 import os
 import datetime
 import platform
-from tkinter import *
-from tkinter import Menu
+from Tkinter import *
+from Tkinter import Menu
 # OS: Usado para acessar o diretório;
 # DateTime: Usado para saber "momento" (dia, mês, ano);
 # Tkinter: Usado para interface gráfica;
