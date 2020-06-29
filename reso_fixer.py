@@ -10,7 +10,7 @@ if not cwd.endswith('/.config/spotify'):
 
 lines = []
 
-with open('prefs2', 'r') as file:
+with open('prefs', 'r') as file:
 	lines = file.readlines()
 	c = 0
 
@@ -23,6 +23,6 @@ with open('prefs2', 'r') as file:
 		c += 1
 	file.close()
 
-with open('prefs2', 'w') as file:
+with open('prefs', 'w') as file:
 	file.writelines(lines)
 	file.close()
