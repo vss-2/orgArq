@@ -8,4 +8,4 @@ class Usuario:
 		self.ponto = 0
 
 	def __repr__(self):
-		return "Olá usuário '{}', mais conhedi por '{}', você tem '{}' ponto(s))".format(self.email, self.nome, self.ponto)
+		return "Olá usuário '{}', mais conhecido por '{}', você tem '{}' ponto(s)!".format(self.email, self.nome, self.ponto)

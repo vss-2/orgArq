@@ -1,6 +1,7 @@
 import sqlite3
 from usuario import Usuario
 from aposta import Aposta
+# import tests_bd
 
 conector = sqlite3.connect(':memory:')
 cursor   = conector.cursor()
@@ -13,21 +14,21 @@ def novo_usuario(usuario):
 
 
 cursor.execute("""CREATE TABLE usuario (
-		id_usr	INTEGER PRIMARY KEY AUTOINCREMENT,
-		email	TEXT,
-		nick	TEXT,
-		senha	TEXT,
-		ponto	INTEGER
+		id_usr  INTEGER PRIMARY KEY AUTOINCREMENT,
+		email   TEXT,
+		nick    TEXT,
+		senha   TEXT,
+		ponto   INTEGER
 		)""")
 
 # Usuario contém id(key), email, senha, nick
 # e pontuação para tabela
 
 cursor.execute("""CREATE TABLE aposta (
-		partida		TEXT,
-		placar  	TEXT,
-		vencedor	TEXT,
-		id_usr		INTEGER,
+		partida    TEXT,
+		placar     TEXT,
+		vencedor   TEXT,
+		id_usr     INTEGER,
 		FOREIGN KEY (id_usr)
 			REFERENCES usuario (id_usr)
 		)""")
