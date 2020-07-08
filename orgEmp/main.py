@@ -1,5 +1,5 @@
 import sqlite3
-import empregado from Empregado.py
+import Empregado
 
 conector = sqlite3.connect('empresa.db')
 # Caso queira executar na memória (limpa sempre que fechado/aberto)
@@ -21,7 +21,7 @@ def buscar_nome(nome):
 def atualizar_salario(emp, novo_salario):
     with conector:
         conector.execute("UPDATE empresas SET salario=:salario WHERE nome=:nome AND admissao=:admissao",
-                            {'nome': emp.nome, 'salario': novo_salario, 'admissao': emp.admissao}
+                            {'nome': emp.nome, 'salario': novo_salario, 'admissao': emp.admissao})
     return
 
 def remover_emp(emp):
@@ -36,16 +36,17 @@ def remover_emp(emp):
 cursor   = conector.cursor()
 
 cursor.execute("""CREATE TABLE empregados (
-		nome       text,
-		salario    real,
-		admissao   text,
-		demissao   text
+                numero     INTEGER PRIMARY KEY AUTOINCREMENT,
+		nome       TEXT,
+		salario    REAL,
+		admissao   TEXT,
+		demissao   TEXT
 		)""")
 
 """ Botar depois
-        cpf        text,
-        ctps       text,
-        nascimento text,
+        cpf        TEXT,
+        ctps       TEXT,
+        nascimento TEXT,
 """
 
 # Jeito errado usando .format, suscetível a SQL Injection
