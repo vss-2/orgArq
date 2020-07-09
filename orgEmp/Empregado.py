@@ -8,4 +8,4 @@ class Empregado:
                 self.demissao = demissao
         
         def __repr__(self):
-                return "Employee ('{}', '{}', {})".format(self.nome, self. salario, self.admissao, self.demissao)
+                return "Dados do empregado ('{}', '{}', {})".format(self.nome, self. salario, self.admissao, self.demissao)

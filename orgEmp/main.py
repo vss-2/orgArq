@@ -1,5 +1,6 @@
+import os.path
 import sqlite3
-import Empregado
+from Empregado import Empregado
 
 conector = sqlite3.connect('empresa.db')
 # Caso queira executar na memória (limpa sempre que fechado/aberto)
@@ -30,12 +31,19 @@ def remover_emp(emp):
                             {'nome': emp.nome, 'admissao': emp.admissao})
     return
     
-
+def banco_completo():
+    conector = sqlite3.connect('empresa.db')
+    cursor  = conector.cursor()
+    cursor.execute("SELECT * FROM empresa")
+    todos = cursor.fetchall()
+    conector.close()
+    return todos
 ####################################################################
 
-cursor   = conector.cursor()
+cursor  = conector.cursor()
 
-cursor.execute("""CREATE TABLE empregados (
+if(not os.path.exists('empresa.db')):
+    cursor.execute("""CREATE TABLE empresa (
                 numero     INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome       TEXT,
 		salario    REAL,
@@ -50,13 +58,13 @@ cursor.execute("""CREATE TABLE empregados (
 """
 
 # Jeito errado usando .format, suscetível a SQL Injection
-cursor.execute("INSERT INTO empresa VALUES ('{}', {}, '{}', '{}')".format('Joao Silva', 1030.0, '23/10/2019', ''))
+# cursor.execute("INSERT INTO empresa VALUES ('{}', '{}', {}, '{}', '{}')".format(None, 'Joao Silva', 1030.0, '23/10/2019'))
 
 # 2 Alternativas:
 ## Usando Tuplas:
-cursor.execute("INSERT INTO empresa VALUES (?, ?, ?, ?)", ('Joao Silva', 1030.0, '23/10/2019', ''))
+cursor.execute("INSERT INTO empresa VALUES (?, ?, ?, ?, ?)", (None, 'Joao Silva', 1030.0, '23/10/2019', ''))
 ## Usando Dicionários:
-cursor.execute("INSERT INTO empresa VALUES (:nome, :salario, :admissao, :demissao)", {'nome': 'Joao Silva', 'salario': 1030.0, 'admissao': '23/10/2019', 'demissao': ''})
+cursor.execute("INSERT INTO empresa VALUES (:numero, :nome, :salario, :admissao, :demissao)", {'numero': None, 'nome': 'Joao Silva', 'salario': 1030.0, 'admissao': '23/10/2019', 'demissao': ''})
 
 emp_1 = Empregado('Jose Silva', 1090.0, '10/05/2018', '')
 emp_1 = Empregado('Maria Silva', 1200.0, '13/07/2019', '')
