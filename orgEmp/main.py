@@ -32,17 +32,17 @@ def remover_emp(emp):
     return
     
 def banco_completo():
-    conector = sqlite3.connect('empresa.db')
-    cursor  = conector.cursor()
-    cursor.execute("SELECT * FROM empresa")
-    todos = cursor.fetchall()
-    conector.close()
-    return todos
+        conector = sqlite3.connect('empresa.db')
+        cursor  = conector.cursor()
+        cursor.execute("SELECT * FROM empresa")
+        todos = cursor.fetchall()
+        conector.close()
+        return todos
 ####################################################################
 
 cursor  = conector.cursor()
 
-if(not os.path.exists('empresa.db')):
+if(os.path.exists('empresa.db')):
     cursor.execute("""CREATE TABLE empresa (
                 numero     INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome       TEXT,
