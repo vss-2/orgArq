@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter.font import Font
 from tkinter import messagebox
 
 def percentual(salario, inss):
@@ -8,8 +9,8 @@ def percentual(salario, inss):
 def main():
     base = Tk()
     base.wm_title('Cálculo de INSS')
-
-    descricao_lb = Label(base, text='Insira o salário: ')
+    base_fonte = Font(family="Helvetica", size=18)
+    descricao_lb = Label(base, text='Insira o salário: ', font=base_fonte)
     descricao_lb.grid(row=0, column=0)
 
     def calcular(event=None):
@@ -40,18 +41,20 @@ def main():
 	        messagebox.showinfo('Valor alto: R${:.2f}'.format(sal), 'Salário superior a R$ 6101.06, provavelmente é só multiplicar por 14%! \nR${:.2f}'.format(sal*0.14))
 
     sal_input = StringVar()
-    sal_entry = Entry(base, textvariable = sal_input)
+    sal_entry = Entry(base, textvariable = sal_input, font=base_fonte)
     sal_entry.grid(row=0, column=1)
     sal_entry.bind('<Return>', calcular)
 
     botao_calcular = Button(base,
         text='Calcular INSS',
-        command=calcular
+        command=calcular,
+	font=base_fonte
     )
     botao_calcular.grid(row=1, column=1)
 
     botao_sair = Button(base,
         text='Sair',
+	font=base_fonte,
         command=quit
     )
 
