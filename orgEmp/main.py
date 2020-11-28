@@ -68,6 +68,8 @@ cursor.execute("INSERT INTO empresa VALUES (:numero, :nome, :salario, :admissao,
 
 emp_1 = Empregado('Jose Silva', 1090.0, '10/05/2018', '')
 emp_1 = Empregado('Maria Silva', 1200.0, '13/07/2019', '')
+Marcos = Empregado('Marcos', 1045.0, '10/08/1999', '27/10/2020')
+Marcos2 = Empregado('Marcos Segundo', 1045.0, '10/08/1999', '31/10/2020')
 
 cursor.execute("SELECT * FROM empresa WHERE salario=?", (1030.0,))
 cursor.execute("SELECT * FROM empresa WHERE nome=:nome", {'nome': 'Joao Silva'})
