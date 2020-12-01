@@ -51,7 +51,7 @@ if(os.path.exists('empresa.db') == False):
                 cpf        TEXT,
                 nascimento TEXT,
                 empresa    INTEGER
-		)""")
+		);""")
     cursor.execute("""CREATE TABLE empresa (
                 numero     INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome       TEXT,
@@ -60,7 +60,7 @@ if(os.path.exists('empresa.db') == False):
                 cep        TEXT,
                 endereco   TEXT,
                 insc_estadual TEXT
-                )""")
+                );""")
 
 # Jeito errado usando .format, suscetível a SQL Injection
 # cursor.execute("INSERT INTO empresa VALUES ('{}', '{}', {}, '{}', '{}')".format(None, 'Joao Silva', 1030.0, '23/10/2019'))
