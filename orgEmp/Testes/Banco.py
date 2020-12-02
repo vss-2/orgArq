@@ -64,10 +64,55 @@ def mostrar_empresa():
         print(csr.fetchall())
         return
 
+def remover_empregado(campo, fk_empregado):
+        if(type(fk_empregado) == str):
+                fk_empregado = '\'{}\''.format(fk_empregado)
+
+        rm_marcos = csr.execute("DELETE FROM empregado WHERE cpf={}".format(fk_empregado))
+        return
+
+def remover_empresa(campo, fk_empresa):
+        if(type(fk_empresa) == str):
+                fk_empresa = '\'{}\''.format(fk_empresa)
+
+        rm_bar = csr.execute("DELETE FROM empresa WHERE cnpj={}".format(fk_empresa))
+        return
+
+def atualizar_empregado(campo, novo_valor, fk_empregado, id_empregado):
+        if(type(novo_valor) == str):
+                novo_valor = '\'{}\''.format(novo_valor)
+        if(type(id_empregado) == str):
+                id_empregado = '\'{}\''.format(id_empregado)
+
+        csr.execute("UPDATE empregado SET {} = {} WHERE {} = {}".format(campo, novo_valor, fk_empregado, id_empregado))
+        return
+
+def atualizar_empresa(campo, novo_valor, fk_empresa, id_empresa):
+        if(type(novo_valor) == str):
+                novo_valor = '\'{}\''.format(novo_valor)
+        if(type(id_empresa) == str):
+                id_empresa = '\'{}\''.format(id_empresa)
+
+        csr.execute("UPDATE empresa SET {} = {} WHERE {} = {}".format(campo, novo_valor, fk_empresa, id_empresa))
+        return
+
 if __name__ == "__main__":
         cnc, csr = iniciar_banco()
-        csr.execute("SELECT * from empregado")
+
         inserir_banco_empregado()
         inserir_banco_empresa()
+        mostrar_empregado()
+        mostrar_empresa()
+
+        # Se for alguma String em novo_valor ou id_empregado,
+        # tem que dar cast de aspas simples, ex: s = '\'{}\''.format(novo_valor)
+        atualizar_empregado('nome', 'Marcos Primeiro', 'cpf', '13898415')
+        mostrar_empregado()
+        atualizar_empresa('nome', 'Roth-Bar Libertário LTDA', 'cnpj', '3031902457')
+        mostrar_empresa()
+
+        remover_empregado('cpf', '13898415')
+        remover_empresa('cnpj', '3031902457')
+
         mostrar_empregado()
         mostrar_empresa()
